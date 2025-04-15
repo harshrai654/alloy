@@ -41,7 +41,7 @@ jobs:
       run: brew tap grafana/grafana
 
     - name: Update Homebrew formula
-      if: 'steps.latest_release.outputs.release_id == github.event.release.id'
+      # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
       run: |
         brew bump-formula-pr \
           --no-browse \
