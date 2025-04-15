@@ -32,13 +32,22 @@ jobs:
         repository: "${{ github.repository }}"
         type: "stable"
 
-    - name: Setup Homebrew
-      uses: Homebrew/actions/setup-homebrew@4a509e36a728d1c8e147158247eb0446838a8d63 # master
+    - name: Update Homebrew formula
+      # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
+      uses: dawidd6/action-homebrew-bump-formula@v3
       with:
+        # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
         token: ${{ steps.app-token.outputs.token }}
-
-    - name: Tap Grafana formula repository
-      run: brew tap grafana/grafana
+        # Optional, defaults to homebrew/core
+        tap: grafana/grafana
+        # Formula name, required
+        formula: alloy
+        # Optional, will be determined automatically
+        tag: ${{github.ref}}
+        # Optional, will be determined automatically
+        revision: ${{github.sha}}
+        # Optional, if don't want to check for already open PRs
+        force: false # true
 
     - name: Update Homebrew formula
       # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
@@ -47,6 +56,7 @@ jobs:
           --no-browse \
           --no-audit \
           --no-fork \
+          --dry-run \
           --verbose \
           --debug \
           --url https://github.com/grafana/alloy/archive/refs/tags/v1.7.0.tar.gz \
