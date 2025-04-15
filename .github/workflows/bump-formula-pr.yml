@@ -49,7 +49,7 @@ jobs:
           --no-fork \
           --verbose \
           --debug \
-          --url https://github.com/grafana/alloy/archive/refs/tags/${{ github.ref_name }}.tar.gz \
+          --url https://github.com/grafana/alloy/archive/refs/tags/v1.7.0.tar.gz \
           grafana/grafana/alloy
       env:
         HOMEBREW_DEVELOPER: "1"
