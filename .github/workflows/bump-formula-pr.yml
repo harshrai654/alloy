@@ -2,6 +2,7 @@ name: bump-formula-pr
 on:
   release:
     types: [released]
+  pull_request:
 
 jobs:
   homebrew-grafana:
@@ -46,6 +47,8 @@ jobs:
           --no-browse \
           --no-audit \
           --no-fork \
+          --verbose \
+          --debug \
           --url https://github.com/grafana/alloy/archive/refs/tags/${{ github.ref_name }}.tar.gz \
           grafana/grafana/alloy
       env:
