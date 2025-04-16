@@ -34,7 +34,7 @@ jobs:
 
     - name: Update Homebrew formula
       # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
-      uses: dawidd6/action-homebrew-bump-formula@v3
+      uses: ptodev/action-homebrew-bump-formula
       with:
         # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
         token: ${{ steps.app-token.outputs.token }}
@@ -48,19 +48,22 @@ jobs:
         revision: ${{github.sha}}
         # Optional, if don't want to check for already open PRs
         force: false # true
-
-    - name: Update Homebrew formula
-      # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
-      run: |
-        brew bump-formula-pr \
-          --no-browse \
-          --no-audit \
-          --no-fork \
-          --dry-run \
-          --verbose \
-          --debug \
-          --url https://github.com/grafana/alloy/archive/refs/tags/v1.7.0.tar.gz \
-          grafana/grafana/alloy
       env:
         HOMEBREW_DEVELOPER: "1"
         HOMEBREW_GITHUB_API_TOKEN: ${{ steps.app-token.outputs.token }}
+  
+    # - name: Update Homebrew formula
+    #   # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
+    #   run: |
+    #     brew bump-formula-pr \
+    #       --no-browse \
+    #       --no-audit \
+    #       --no-fork \
+    #       --dry-run \
+    #       --verbose \
+    #       --debug \
+    #       --url https://github.com/grafana/alloy/archive/refs/tags/v1.7.0.tar.gz \
+    #       grafana/grafana/alloy
+    #   env:
+    #     HOMEBREW_DEVELOPER: "1"
+    #     HOMEBREW_GITHUB_API_TOKEN: ${{ steps.app-token.outputs.token }}
