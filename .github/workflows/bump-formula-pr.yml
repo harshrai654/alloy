@@ -34,7 +34,7 @@ jobs:
 
     - name: Update Homebrew formula
       # if: 'steps.latest_release.outputs.release_id == github.event.release.id'
-      uses: ptodev/action-homebrew-bump-formula
+      uses: ptodev/action-homebrew-bump-formula@master
       with:
         # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
         token: ${{ steps.app-token.outputs.token }}
