@@ -44,7 +44,7 @@ jobs:
         formula: alloy
         # Optional, will be determined automatically
         # tag: ${{github.ref}}
-        tag: v1.7.0
+        tag: v1.8.2
         # Optional, will be determined automatically
         # revision: ${{github.sha}}
         revision: 14b3fa4
